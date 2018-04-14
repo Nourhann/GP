@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141">
+<AnchorPane id="AnchorPane" prefHeight="533.0" prefWidth="1083.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane layoutX="-10.0" layoutY="-9.0" prefHeight="412.0" prefWidth="229.0" style="-fx-background-color: #0747A6;">
+      <AnchorPane layoutX="-10.0" layoutY="-9.0" prefHeight="542.0" prefWidth="238.0" style="-fx-background-color: #0747A6;">
          <children>
             <JFXButton layoutX="10.0" layoutY="55.0" prefHeight="25.0" prefWidth="220.0" text="POWER" textFill="#f5eeee" />
             <JFXButton layoutX="9.0" layoutY="97.0" prefHeight="25.0" prefWidth="227.0" text="OBC" textFill="#fcf9f9" />
@@ -17,5 +23,61 @@
             <JFXButton layoutX="10.0" layoutY="344.0" prefHeight="25.0" prefWidth="227.0" text="PAYLOAD" textFill="#f8f6f6" />
          </children>
       </AnchorPane>
+      <JFXTextField layoutX="331.0" layoutY="14.0" unFocusColor="#0747a6" />
+      <Label layoutX="254.0" layoutY="18.0" text="Packet APID" textFill="#0a0a0a" />
+      <JFXButton layoutX="496.0" layoutY="14.0" text="save" />
+      <JFXTextField layoutX="268.0" layoutY="96.0" prefHeight="25.0" prefWidth="144.0" />
+      <JFXTextField layoutX="260.0" layoutY="167.0" prefHeight="25.0" prefWidth="144.0" />
+      <JFXTextField layoutX="265.0" layoutY="237.0" prefHeight="25.0" prefWidth="65.0" />
+      <JFXTextField layoutX="354.0" layoutY="237.0" prefHeight="25.0" prefWidth="65.0" />
+      <Label layoutX="270.0" layoutY="71.0" text="Sensor Name" />
+      <Label layoutX="270.0" layoutY="138.0" text="Sensor Unit" textFill="#0d0d0d" />
+      <Label layoutX="287.0" layoutY="211.0" text="Min" />
+      <Label layoutX="354.0" layoutY="211.0" text="Max" />
+      <JFXTextArea layoutX="516.0" layoutY="93.0" prefHeight="90.0" prefWidth="180.0" />
+      <Label layoutX="481.0" layoutY="71.0" text="Description" textFill="#0d0d0d" />
+      <CheckBox layoutX="734.0" layoutY="100.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="77.0" text="ON-OFF" />
+      <CheckBox layoutX="738.0" layoutY="138.0" mnemonicParsing="false" text="Status" />
+      <CheckBox layoutX="738.0" layoutY="179.0" mnemonicParsing="false" text="Equation" />
+      <Label layoutX="732.0" layoutY="71.0" text="Type" />
+      <JFXTextField layoutX="853.0" layoutY="85.0" prefHeight="25.0" prefWidth="61.0" />
+      <JFXTextField layoutX="959.0" layoutY="88.0" prefHeight="25.0" prefWidth="77.0" />
+      <JFXTextField layoutX="868.0" layoutY="126.0" />
+      <JFXTextField layoutX="879.0" layoutY="167.0" />
+      <JFXTextField layoutX="901.0" layoutY="245.0" />
+      <JFXCheckBox layoutX="819.0" layoutY="211.0" text="Range" />
+      <Label layoutX="824.0" layoutY="100.0" text="ON" />
+      <Label layoutX="925.0" layoutY="100.0" text="OFF" />
+      <Label layoutX="817.0" layoutY="138.0" text="Status" />
+      <Label layoutX="820.0" layoutY="179.0" text="Equation" />
+      <Label layoutX="826.0" layoutY="249.0" text="Range" />
+      <TableView layoutX="232.0" layoutY="309.0" prefHeight="190.0" prefWidth="751.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text=" Name" />
+          <TableColumn prefWidth="75.0" text="Unit" />
+            <TableColumn prefWidth="75.0" text="Min" />
+            <TableColumn prefWidth="75.0" text="Max" />
+            <TableColumn prefWidth="75.0" text="Description" />
+            <TableColumn prefWidth="75.0" text="Type">
+               <columns>
+                  <TableColumn prefWidth="75.0" text="ON-OFF">
+                     <columns>
+                        <TableColumn prefWidth="75.0" text="ON" />
+                        <TableColumn prefWidth="75.0" text="OFF" />
+                     </columns>
+                  </TableColumn>
+                  <TableColumn prefWidth="75.0" text="Status" />
+                  <TableColumn prefWidth="75.0" text="Equation">
+                     <columns>
+                        <TableColumn prefWidth="75.0" text="Equation" />
+                        <TableColumn prefWidth="75.0" text="Range" />
+                     </columns>
+                  </TableColumn>
+               </columns>
+            </TableColumn>
+        </columns>
+      </TableView>
+      <JFXButton layoutX="563.0" layoutY="267.0" text="Preview" />
+      <JFXButton layoutX="998.0" layoutY="467.0" text="Save" />
    </children>
 </AnchorPane>
