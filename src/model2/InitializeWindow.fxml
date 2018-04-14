@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141">
+   <children>
+      <AnchorPane layoutX="-10.0" layoutY="-9.0" prefHeight="412.0" prefWidth="229.0" style="-fx-background-color: #0747A6;">
+         <children>
+            <JFXButton layoutX="10.0" layoutY="55.0" prefHeight="25.0" prefWidth="220.0" text="POWER" textFill="#f5eeee" />
+            <JFXButton layoutX="9.0" layoutY="97.0" prefHeight="25.0" prefWidth="227.0" text="OBC" textFill="#fcf9f9" />
+            <JFXButton layoutX="8.0" layoutY="147.0" prefHeight="25.0" prefWidth="227.0" text="COM" textFill="#f2eeee" />
+            <JFXButton layoutX="8.0" layoutY="194.0" prefHeight="25.0" prefWidth="227.0" text="ADCS" textFill="#ebe5e5" />
+            <JFXButton layoutX="10.0" layoutY="245.0" prefHeight="25.0" prefWidth="227.0" text="CORE1" textFill="#f8f6f6" />
+            <JFXButton layoutX="9.0" layoutY="288.0" prefHeight="25.0" prefWidth="227.0" text="CORE2" textFill="#f2eded" />
+            <JFXButton layoutX="10.0" layoutY="344.0" prefHeight="25.0" prefWidth="227.0" text="PAYLOAD" textFill="#f8f6f6" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
