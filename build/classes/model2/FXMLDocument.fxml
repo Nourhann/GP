@@ -1,28 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="496.0" prefWidth="620.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="model2.FXMLDocumentController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="496.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="model2.FXMLDocumentController">
    <children>
-      <AnchorPane layoutX="-1.0" prefHeight="496.0" prefWidth="223.0" style="-fx-background-color: black;">
+      <AnchorPane layoutX="-1.0" prefHeight="496.0" prefWidth="223.0" style="-fx-background-color: #0747A6;">
          <children>
-            <JFXButton layoutY="77.0" prefHeight="25.0" prefWidth="223.0" text="Initialize " textFill="#fcfcfc">
-               <graphic>
-                  <MaterialDesignIconView />
-               </graphic>
-            </JFXButton>
-            <JFXButton layoutY="136.0" prefHeight="25.0" prefWidth="224.0" text="Design New Tab" textFill="#fffefe">
-               <graphic>
-                  <MaterialDesignIconView />
-               </graphic>
-            </JFXButton>
-            <JFXButton layoutX="-2.0" layoutY="208.0" prefHeight="25.0" prefWidth="212.0" text="Begin unpaking process" textFill="#f8f8f8">
-               <graphic>
-                  <MaterialDesignIconView />
-               </graphic>
-            </JFXButton>
+            <Button layoutX="-1.0" layoutY="68.0" mnemonicParsing="false" onAction="#loadInitialization" prefHeight="32.0" prefWidth="223.0" style="-fx-background-color: #0747A6;" text="Initialization" textFill="#f8f6f6" />
+            <Button layoutX="-1.0" layoutY="142.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="223.0" style="-fx-background-color: #0747A6;" text="Design New Tab" textFill="#f8f6f6" />
+            <Button layoutX="-1.0" layoutY="216.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="223.0" style="-fx-background-color: #0747A6;" text="Begin Unpacking Process" textFill="WHITE" />
          </children>
       </AnchorPane>
    </children>
