@@ -9,7 +9,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="533.0" prefWidth="1083.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" fx:id="root2" prefHeight="533.0" prefWidth="1083.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="model2.InitializeWindowController">
    <children>
       <AnchorPane layoutX="-10.0" layoutY="-9.0" prefHeight="542.0" prefWidth="238.0" style="-fx-background-color: #0747A6;" />
       <Label layoutX="254.0" layoutY="18.0" text="Packet APID" textFill="#0a0a0a" />
