@@ -14,7 +14,7 @@
             <Image url="@stars_sky_space_car_113629_1920x1080.jpg" />
          </image>
       </ImageView>
-      <Button id="button" layoutX="192.0" layoutY="254.0" mnemonicParsing="false" onAction="#loadInitialization" prefHeight="32.0" prefWidth="172.0" style="-fx-background-color: #9d9477;" text="Initialization" textAlignment="CENTER" textFill="WHITE" />
+      <Button id="button" layoutX="192.0" layoutY="254.0" mnemonicParsing="false" onAction="#loadInitialization" prefHeight="32.0" prefWidth="172.0" style="-fx-background-color: #000000; -fx-text-fill: Bold;" text="Initialization" textAlignment="CENTER" textFill="WHITE" />
       <Button layoutX="192.0" layoutY="300.0" mnemonicParsing="false" onAction="#loadDesignNewTab" prefHeight="32.0" prefWidth="172.0" style="-fx-background-color: #9d9477;" text="Design New Tab" textFill="WHITE" />
       <Button layoutX="192.0" layoutY="386.0" mnemonicParsing="false" onAction="#loadDesignNewTab" prefHeight="32.0" prefWidth="172.0" style="-fx-background-color: #9d9477;" text="Begin Unpacking Process" textFill="#f4f5f2" />
       <Button layoutX="192.0" layoutY="343.0" mnemonicParsing="false" onAction="#loadCharts" prefHeight="32.0" prefWidth="172.0" style="-fx-background-color: #9d9477;" text="Charts" textFill="WHITE" />
