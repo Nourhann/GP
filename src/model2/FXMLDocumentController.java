@@ -75,6 +75,18 @@ public class FXMLDocumentController implements Initializable {
 //        
       //  root 
     }
+     public void loadBeginUnpackingProcess() throws IOException{
+       AnchorPane pane = FXMLLoader.load(getClass().getResource("BeginUnpackingProcess.fxml"));
+       root.getChildren().clear();
+       root.getChildren().addAll(pane);
+//      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DesignNewTab.fxml"));
+//      Parent root1 = (Parent) fxmlLoader.load();
+//      Stage stage = new Stage();
+//      stage.setScene(new Scene(root1)); 
+//      stage.show();
+//        
+      //  root 
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

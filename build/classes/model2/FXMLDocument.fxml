@@ -6,17 +6,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-image: url('stars_sky_space_car_113629_1920x1080.jpg')" stylesheets="newCascadeStyleSheet.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="model2.FXMLDocumentController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="675.0" prefWidth="1280.0" style="-fx-background-image: url('stars_sky_space_car_113629_1920x1080.jpg')" stylesheets="newCascadeStyleSheet.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="model2.FXMLDocumentController">
    <children>
       <AnchorPane prefHeight="600.0" prefWidth="200.0" />
-      <ImageView fitHeight="600.0" fitWidth="1200.0">
+      <ImageView fitHeight="675.0" fitWidth="1280.0">
          <image>
             <Image url="@stars_sky_space_car_113629_1920x1080.jpg" />
          </image>
       </ImageView>
       <Button id="button" layoutX="192.0" layoutY="254.0" mnemonicParsing="false" onAction="#loadInitialization" prefHeight="32.0" prefWidth="172.0" style="-fx-background-color: #000000; -fx-text-fill: Bold;" text="Initialization" textAlignment="CENTER" textFill="WHITE" />
       <Button layoutX="192.0" layoutY="300.0" mnemonicParsing="false" onAction="#loadDesignNewTab" prefHeight="32.0" prefWidth="172.0" style="-fx-background-color: #9d9477;" text="Design New Tab" textFill="WHITE" />
-      <Button layoutX="192.0" layoutY="386.0" mnemonicParsing="false" onAction="#loadDesignNewTab" prefHeight="32.0" prefWidth="172.0" style="-fx-background-color: #9d9477;" text="Begin Unpacking Process" textFill="#f4f5f2" />
+      <Button layoutX="192.0" layoutY="386.0" mnemonicParsing="false" onAction="#loadBeginUnpackingProcess" prefHeight="32.0" prefWidth="172.0" style="-fx-background-color: #9d9477;" text="Begin Unpacking Process" textFill="#f4f5f2" />
       <Button layoutX="192.0" layoutY="343.0" mnemonicParsing="false" onAction="#loadCharts" prefHeight="32.0" prefWidth="172.0" style="-fx-background-color: #9d9477;" text="Charts" textFill="WHITE" />
       <Text fill="#9d9477" layoutX="192.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 48;" text="UnPacking System" textAlignment="CENTER" />
    </children>
