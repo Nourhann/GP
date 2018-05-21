@@ -310,18 +310,18 @@ public class DB {
         return Table;// lsa el min w el max
         
     }
-    String PACKETSENSORS(String subsystemname,Connection connection) throws SQLException
-    {
-        
-        String query="SELECT `PACKETSENSORS` FROM `system` JOIN `packet` WHERE packet.SYSTEMID=system.SYSTEMID and system.SYSTEMDESCRIPTION='"
-                +subsystemname+" SubSystem'";
-        
-        Statement statement=connection.createStatement();
-        ResultSet Table=statement.executeQuery(query);
-        Table.next();
-        String PACKETSENSORS=Table.getString("PACKETSENSORS");
-        return PACKETSENSORS;
-    }
+//    String PACKETSENSORS(String subsystemname,Connection connection) throws SQLException
+//    {
+//        
+//        String query="SELECT `PACKETSENSORS` FROM `system` JOIN `packet` WHERE packet.SYSTEMID=system.SYSTEMID and system.SYSTEMDESCRIPTION='"
+//                +subsystemname+" SubSystem'";
+//        
+//        Statement statement=connection.createStatement();
+//        ResultSet Table=statement.executeQuery(query);
+//        Table.next();
+//        String PACKETSENSORS=Table.getString("PACKETSENSORS");
+//        return PACKETSENSORS;
+//    }
         ResultSet SelectAllsensorspositions(String Subsystemname ,Connection connection) throws SQLException
     {
         String query="SELECT BYTENO,SENSORNO,BITS,BYTEORDER FROM `address` a,`packet` p, `system` s where a.PACKETID=p.PACKETID and p.SYSTEMID=s.SYSTEMID and s.SYSTEMDESCRIPTION="+Subsystemname+" SubSystem";
@@ -338,4 +338,29 @@ public class DB {
         String sensors[]=Table.getString("PACKETSENSORS").split(",");
         return sensors.length;
     }
+         String PACKETSENSORS(String subsystemname,Connection connection) throws SQLException
+    {
+
+           String query="SELECT PACKETSENSORS FROM packet x,system y WHERE x.SYSTEMID=y.SYSTEMID and y.SYSTEMDESCRIPTION='"+subsystemname+" SubSystem' ";
+        
+        Statement statement=connection.createStatement();
+        ResultSet Table=statement.executeQuery(query);
+        Table.next();
+        String PACKETSENSORS=Table.getString("PACKETSENSORS");
+        return PACKETSENSORS;
+    }
+         void Insertusertab (String sensors , String tabname,Connection connection) throws SQLException
+    {
+        try
+        {
+            String query="INSERT INTO `usertab`(`tabname`, `sensors`) VALUES ('"+tabname+"','"+sensors+"')";
+            Statement statement=connection.createStatement();
+            int flag=statement.executeUpdate(query);
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error in Usertab statement");
+        }
+}
+    
 }

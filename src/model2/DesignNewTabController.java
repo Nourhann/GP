@@ -7,7 +7,13 @@ package model2;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -16,9 +22,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.IndexedCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DataFormat;
@@ -37,14 +45,14 @@ import javafx.util.Callback;
 public class DesignNewTabController implements Initializable {
 
    @FXML
-    private ListView<Integer> listView;
+    private ListView<String> listView;
 
  
      public static DataFormat dataFormat = new DataFormat("mydata");
     @FXML
     public TableColumn<Sensor, String> nameCol;
 
-      @FXML
+    @FXML
     public TableColumn<Sensor, String> IDCol;
 
     @FXML
@@ -52,14 +60,56 @@ public class DesignNewTabController implements Initializable {
 
     @FXML
     public TableView<Sensor> tableView;
+    @FXML
+    public TextField TabName;
     public AnchorPane root;
+    DB db = new DB();
+    String[] Sensors;
+    ObservableList<Integer> selectedIndexes = FXCollections.observableArrayList();
+    ObservableList<String> selectedSensors = FXCollections.observableArrayList();
+    
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+         assert nameCol != null ;
+        assert IDCol != null ;
+        assert snCol != null ;
+        assert tableView != null;
+
+        // changed to multiple selection mode
+        tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        // set cell value factories
+        setCellValueFactories();
+
+        //set Dummy Data for the TableView
+        tableView.setItems(getData());
+
+        //ListView items bound with selection index property of tableview
+        listView.setItems(selectedSensors);
+
+        //change listview observable list
+        tableView.getSelectionModel().getSelectedIndices().addListener(new ListChangeListener<Integer>() {
+            @Override
+            public void onChanged(ListChangeListener.Change<? extends Integer> change) {
+                selectedIndexes.setAll(change.getList());
+                selectedSensors.clear();
+                for (int i=0;i<selectedIndexes.size();i++){
+                    selectedSensors.add(Sensors[selectedIndexes.get(i)]);
+                }
+                
+            }
+        });
+      
+      
+
+        //set the Row Factory of the table
+        setRowFactory();
+
+        //Set row selection as default
+        setRowSelection();
     }    
      public void loadHome() throws IOException{
       // System.out.println("model2.InitializeWindowController.loadHome()");
@@ -71,7 +121,15 @@ public class DesignNewTabController implements Initializable {
    
      }
     @FXML
-    private void Store(ActionEvent event) {
+    private void Store(ActionEvent event) throws SQLException {
+      // final ObservableList<Sensor> table = tableView.getSelectionModel().getSelectedItems(); 
+       String result="";
+       for (int i =0 ;i<selectedSensors.size();i++){
+           result+=selectedSensors.get(i)+'|';
+           System.out.println(result);
+       }
+      // System.out.println(TabName.getText());
+       db.Insertusertab(result,TabName.getText(),db.getConnection());
     }
     
     public void setRowSelection() {
@@ -127,5 +185,32 @@ public class DesignNewTabController implements Initializable {
             }
         });
     }
+    public void initializePowerTables() throws SQLException {
+      System.out.println("henea");
     
+      String result=db.PACKETSENSORS("Power",db.connectDB());
+      System.out.println(result);
+      Sensors = result.split(",");
+         
 }
+    public ObservableList<Sensor> getData() {
+        try {
+           
+            initializePowerTables();
+        } catch (SQLException ex) {
+            Logger.getLogger(DesignNewTabController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ObservableList<Sensor> sensors = FXCollections.observableArrayList();
+        for (int i = 0; i < Sensors.length; i++) {
+            Sensor p = new Sensor();
+            
+            p.setName(Sensors[i]);
+          
+            p.setSubsystem("Power");
+            p.setID(i);
+            sensors.add(p);
+        }
+        return sensors;
+    }
+}
+

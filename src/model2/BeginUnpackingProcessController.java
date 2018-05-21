@@ -77,6 +77,7 @@ public class BeginUnpackingProcessController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             // TODO
+            initializePowerTables();
             convert(" ");
             ViewPower();
             System.out.println("NNNN");
@@ -139,7 +140,7 @@ public class BeginUnpackingProcessController implements Initializable {
                       }
                    
                      
-                      return PowerSensors[counter]+"  "+Powerresult.getString(1);
+                      return PowerSensors[counter]+"  "+Powerresult.getString(1)+"\n";
                       
                   }
               };
@@ -209,7 +210,17 @@ public class BeginUnpackingProcessController implements Initializable {
     nextPowerPane(SensorBuilder);
     }
     
+    public void initializePowerTables() throws SQLException {
+  
     
+      PowerSensors = subsystem.setSensors("power");
+     
+      
+              //db.PACKETSENSORS("power",db.connectDB());
+     
+
+         
+}
     private void nextPowerPane(Service<String> recBuilder) {
     
     loadingPower[counter].textProperty().bind(recBuilder.messageProperty());
@@ -226,6 +237,7 @@ public class BeginUnpackingProcessController implements Initializable {
     private Node createLoadPane() throws SQLException {
    
     NumberOFPowersensors = subsystem.getNumberOfSensors("power subsystem");
+    //loadPane1 = new TilePane();
     loadingPower = new Label[NumberOFPowersensors+1];
     for(int i=0;i<NumberOFPowersensors;i++){
             StackPane waitingPane1 = new StackPane();
