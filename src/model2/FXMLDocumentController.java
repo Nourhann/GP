@@ -50,6 +50,25 @@ public class FXMLDocumentController implements Initializable {
         
       //  root 
     }
+    public void loadDesignedTabs() throws IOException{
+       AnchorPane pane = FXMLLoader.load(getClass().getResource("ShowDesignedTabs.fxml"));
+       root.getChildren().clear();
+       root.getChildren().addAll(pane);
+//      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("intialization_1.fxml"));
+//      Parent root1 = (Parent) fxmlLoader.load();
+//      Stage stage = new Stage();
+//      stage.setScene(new Scene(root1)); 
+//      stage.show();
+        
+      //  root 
+    }
+     public void LoadUpdateFilesDirectory() throws IOException{
+         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UpdateFilesDistination.fxml"));
+         Parent root1 = (Parent) fxmlLoader.load(); 
+         Stage stage = new Stage();
+         stage.setScene(new Scene(root1));
+         stage.show();
+     }
       public void loadCharts() throws IOException{
        AnchorPane pane = FXMLLoader.load(getClass().getResource("Charts.fxml"));
        root.getChildren().clear();

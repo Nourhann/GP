@@ -1,0 +1,58 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package model2;
+
+import java.io.File;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ListView;
+import javafx.stage.FileChooser;
+
+/**
+ * FXML Controller class
+ *
+ * @author norhan
+ */
+public class UpdateFilesDistinationController implements Initializable {
+
+    /**
+     * Initializes the controller class.
+     */
+     public ListView listView;
+     public ListView listView2;
+     private String fileName1;
+     private String fileName2;
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    }
+    
+    public void buttom1(){
+        fileName1 =buttomcode(listView);
+        
+    }
+     public void buttom2(){
+        fileName2 =buttomcode(listView2);
+        
+    }
+ public String buttomcode (ListView listView ){
+       
+                FileChooser fileChooser = new FileChooser();
+                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+                fileChooser.getExtensionFilters().add(extFilter);
+                File file = fileChooser.showOpenDialog(null);
+                if(file !=null){
+                listView.getItems().add(file.getName());
+                }
+                
+                System.out.println(file);
+                String fileName = file.toString();
+                return fileName;
+        
+    }    
+    
+}

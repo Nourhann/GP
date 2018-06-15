@@ -362,5 +362,24 @@ public class DB {
             System.out.println("Error in Usertab statement");
         }
 }
+         ResultSet ShowUserTabs (Connection connection) throws SQLException
+    {   
+        
+            String query="SELECT tabname FROM `usertab`";
+            Statement statement=connection.createStatement();
+            ResultSet Table=statement.executeQuery(query);
+            return Table;
+}
+         int NumOfSensors(String TableName ,Connection connection) throws SQLException
+    {
+        String query="SELECT COUNT(*) FROM "+TableName;
+        Statement statement=connection.createStatement();
+        ResultSet Table=statement.executeQuery(query);
+        Table.next();
+        int num=Table.getInt(1);
+        return num;
+    }
+          
+
     
 }

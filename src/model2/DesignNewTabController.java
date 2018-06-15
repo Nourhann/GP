@@ -19,6 +19,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.IndexedCell;
 import javafx.scene.control.ListView;
@@ -35,6 +37,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 /**
@@ -46,9 +49,7 @@ public class DesignNewTabController implements Initializable {
 
    @FXML
     private ListView<String> listView;
-
- 
-     public static DataFormat dataFormat = new DataFormat("mydata");
+    public static DataFormat dataFormat = new DataFormat("mydata");
     @FXML
     public TableColumn<Sensor, String> nameCol;
 
@@ -74,7 +75,7 @@ public class DesignNewTabController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         assert nameCol != null ;
+        assert nameCol != null ;
         assert IDCol != null ;
         assert snCol != null ;
         assert tableView != null;
@@ -120,6 +121,7 @@ public class DesignNewTabController implements Initializable {
        root.getChildren().addAll(pane);
    
      }
+    
     @FXML
     private void Store(ActionEvent event) throws SQLException {
       // final ObservableList<Sensor> table = tableView.getSelectionModel().getSelectedItems(); 
@@ -192,7 +194,7 @@ public class DesignNewTabController implements Initializable {
       System.out.println(result);
       Sensors = result.split(",");
          
-}
+    }
     public ObservableList<Sensor> getData() {
         try {
            

@@ -48,15 +48,21 @@ public class BeginUnpackingProcessController implements Initializable {
      */
     public AnchorPane main;
     private int NumberOFPowersensors ;
+    private int NumberOFOBCsensors ;
     private String PowerSensors[];
+    private String OBCSensors[];
     public TilePane loadPane1;
     public TilePane OBCTile;
     public GridPane gride ;
     private Label loadingPower[] ;
-    private int counter = 0;
+    private Label loadingOBC[] ;
+    private int Powercounter = 0;
+    private int OBCcounter = 0;
     Subsystem subsystem = new Subsystem();
     ResultSet Powerresult;
-    private  Map<String, List<String>> PowerLimits ; 
+    ResultSet obcresult;
+    private  Map<String, List<String>> Limits ; 
+    private  Map<String, List<String>>  OBCLimits;
     unpacking obj ;
 
               
@@ -65,7 +71,7 @@ public class BeginUnpackingProcessController implements Initializable {
               
               
               
-     public void loadHome() throws IOException{
+    public void loadHome() throws IOException{
       // System.out.println("model2.InitializeWindowController.loadHome()");
        AnchorPane pane = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
        //FXMLLoader  loader = new FXMLLoader(getClass().getResource("FXMLDocument.fxml"));
@@ -78,6 +84,7 @@ public class BeginUnpackingProcessController implements Initializable {
         try {
             // TODO
             initializePowerTables();
+            initializeOBCTables();
             convert(" ");
             ViewPower();
             System.out.println("NNNN");
@@ -89,7 +96,7 @@ public class BeginUnpackingProcessController implements Initializable {
             Logger.getLogger(BeginUnpackingProcessController.class.getName()).log(Level.SEVERE, null, ex);
         }
     } 
-     public void convert(String file) throws SQLException, ScriptException{   
+    public void convert(String file) throws SQLException, ScriptException{   
      obj=new unpacking();
      Packet p=new Packet();
      obj.getDb().setConnection(obj.getDb().connectDB());
@@ -108,15 +115,19 @@ public class BeginUnpackingProcessController implements Initializable {
     
 
             ReadPowerData();
+            //ReadOBCData();
             createLoadPane();
+            //createObcPane();
             Timeline fiveSecondsWonder = new Timeline(new KeyFrame(Duration.seconds(10), new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {
 
                     System.out.println("this is called every 5 seconds on UI thread");
-                    counter=0;
+                    Powercounter=0;
+                    OBCcounter =0;
                     loadPowerTab();
+                  //  loadOBCTab();
 
 
             }
@@ -140,7 +151,7 @@ public class BeginUnpackingProcessController implements Initializable {
                       }
                    
                      
-                      return PowerSensors[counter]+"  "+Powerresult.getString(1)+"\n";
+                      return PowerSensors[Powercounter]+" "+Powerresult.getString(1)+"\n";
                       
                   }
               };
@@ -167,8 +178,8 @@ public class BeginUnpackingProcessController implements Initializable {
                 String split []= SensorBuilder.valueProperty().getValue().split("  ");
               
                 rec1.setText(SensorBuilder.valueProperty().getValue());
-                loadingPower[counter].textProperty().unbind();
-                List list = PowerLimits.get(PowerSensors[counter]);
+                loadingPower[Powercounter].textProperty().unbind();
+                List list = Limits.get(PowerSensors[Powercounter]);
                 double min =Double.parseDouble((String) list.get(5));
                 //System.out.println(min);
                 double max = Double.parseDouble((String) list.get(6));
@@ -187,9 +198,9 @@ public class BeginUnpackingProcessController implements Initializable {
                 rec1.setTextFill(Color.web("#008000"));
                 }
                 rec1.setFont(Font.font ("Verdana", 15));
-                loadPane1.getChildren().set(counter, rec1);
-                if(counter<NumberOFPowersensors-1){
-                    counter++;
+                loadPane1.getChildren().set(Powercounter, rec1);
+                if(Powercounter<NumberOFPowersensors-1){
+                    Powercounter++;
                     nextPowerPane(SensorBuilder);
                    
                
@@ -209,6 +220,91 @@ public class BeginUnpackingProcessController implements Initializable {
     
     nextPowerPane(SensorBuilder);
     }
+     
+    private void loadOBCTab() {
+  
+    
+    final Service<String> SensorBuilder = new Service<String>() {
+          @Override protected Task<String> createTask() {
+              return new Task<String>() {
+                  @Override protected String call() throws InterruptedException, SQLException {
+                      
+             
+                      updateProgress(0, 10);
+                     for (int i = 0; i < 10; i++) {
+                        Thread.sleep(10);
+                      }
+                   
+                     
+                      return OBCSensors[OBCcounter]+"  "+obcresult.getString(1)+"\n";
+                      
+                  }
+              };
+          }
+    };
+    
+
+    SensorBuilder.stateProperty().addListener(new ChangeListener<Worker.State>() {
+        @Override public void changed(ObservableValue<? extends Worker.State> observableValue,
+                        Worker.State oldState, Worker.State newState) {
+            switch (newState) {
+            case SCHEDULED:
+                break;
+            case READY:
+            case RUNNING:
+                break;
+            case SUCCEEDED:
+            {
+                try {
+                    Powerresult.next();
+                   // System.out.println(counter +" "+Powerresult.getString(1));
+                     System.out.println("henA");
+                Label rec1 = new Label();
+                String split []= SensorBuilder.valueProperty().getValue().split("  ");
+              
+                rec1.setText(SensorBuilder.valueProperty().getValue());
+                loadingOBC[OBCcounter].textProperty().unbind();
+                List list = Limits.get(OBCSensors[OBCcounter]);
+                double min =Double.parseDouble((String) list.get(5));
+                //System.out.println(min);
+                double max = Double.parseDouble((String) list.get(6));
+                if((min !=0 || max !=0)){
+                   // System.out.println("value "+split[1]);
+                double value = Double.parseDouble(split[1]);
+                  if((value <min || value>max)){
+                       
+                 rec1.setTextFill(Color.web("#FF0000"));
+                  }
+                  else {
+                      rec1.setTextFill(Color.web("#008000")); 
+                  }
+                }
+                else {
+                rec1.setTextFill(Color.web("#008000"));
+                }
+                rec1.setFont(Font.font ("Verdana", 15));
+                OBCTile.getChildren().set(OBCcounter, rec1);
+                if(Powercounter<NumberOFPowersensors-1){
+                    OBCcounter++;
+                    nextPowerPane(SensorBuilder);
+                   
+               
+                }
+                } catch (SQLException ex) {
+                    Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
+           
+            }
+         
+            
+            }
+       }
+    });
+     
+    
+    nextOBCPane(SensorBuilder);
+    }
     
     public void initializePowerTables() throws SQLException {
   
@@ -221,31 +317,57 @@ public class BeginUnpackingProcessController implements Initializable {
 
          
 }
+    public void initializeOBCTables() throws SQLException {
+  
+    
+      OBCSensors = subsystem.setSensors("OBC");
+     
+      
+              //db.PACKETSENSORS("power",db.connectDB());
+     
+
+         
+}
     private void nextPowerPane(Service<String> recBuilder) {
     
-    loadingPower[counter].textProperty().bind(recBuilder.messageProperty());
+    loadingPower[Powercounter].textProperty().bind(recBuilder.messageProperty());
+    recBuilder.restart();
+    }
+    private void nextOBCPane(Service<String> recBuilder) {
+    
+    loadingOBC[OBCcounter].textProperty().bind(recBuilder.messageProperty());
     recBuilder.restart();
     }
     public void ReadPowerData() throws SQLException {
         int x=obj.getSessionID();
-         PowerLimits = obj.getSensors();
+        Limits = obj.getSensors();
         Powerresult = subsystem.ReadData(x, "Power SubSystem");
         
         Powerresult.next();
     }
+    public void ReadOBCData() throws SQLException {
+        int x=obj.getSessionID();
+        OBCLimits = obj.getSensors();
+        obcresult = subsystem.ReadData(x, "OBC SubSystem");
+        obcresult.next();
+    }
     
     private Node createLoadPane() throws SQLException {
    
-    NumberOFPowersensors = subsystem.getNumberOfSensors("power subsystem");
+    NumberOFPowersensors =16;
+            //subsystem.getNumberOfSensors("power subsystem");
     //loadPane1 = new TilePane();
     loadingPower = new Label[NumberOFPowersensors+1];
     for(int i=0;i<NumberOFPowersensors;i++){
             StackPane waitingPane1 = new StackPane();
-            waitingPane1.setMinSize(10, 20);
-            waitingPane1.setMaxSize(100, 100);
+           // waitingPane1.setMinSize(10, 20);
+           // waitingPane1.setMaxSize(100, 100);
             Label background = new Label();
             background.setText(i+"");
-            loadingPower[i] = new Label();
+            Label NewLabel = new Label();
+            NewLabel.setMaxSize(10, 100);
+            NewLabel.setMinHeight(30);
+            loadingPower[i] =NewLabel;
             waitingPane1.getChildren().addAll(background, loadingPower[i]);
             loadPane1.getChildren().add(waitingPane1);
     }
@@ -253,5 +375,24 @@ public class BeginUnpackingProcessController implements Initializable {
 
     return loadPane1;
 }
-    
+      private Node createObcPane() throws SQLException {
+   
+    NumberOFOBCsensors =16;
+            //subsystem.getNumberOfSensors("power subsystem");
+    //loadPane1 = new TilePane();
+    loadingOBC = new Label[NumberOFPowersensors+1];
+    for(int i=0;i<NumberOFPowersensors;i++){
+            StackPane waitingPane1 = new StackPane();
+            waitingPane1.setMinSize(10, 20);
+            waitingPane1.setMaxSize(100, 100);
+            Label background = new Label();
+            background.setText(i+"");
+            loadingOBC[i] = new Label();
+            waitingPane1.getChildren().addAll(background, loadingOBC[i]);
+            OBCTile.getChildren().add(waitingPane1);
+    }
+   
+
+    return OBCTile;
+}  
 }

@@ -54,7 +54,9 @@ public class InitializeWindowController implements Initializable {
      ToggleGroup groupEquation = new ToggleGroup();
      ToggleGroup groupFormat = new ToggleGroup();
      String SubSystem;
+     int SubSystemID;
      String APiD;
+     DB db = new DB();
     @FXML
     public RadioButton positiveFormat;
 
@@ -201,7 +203,7 @@ public class InitializeWindowController implements Initializable {
     @FXML
     public TextField RangeFiled;
     public AnchorPane Vbox ;
-    public ObservableList<String> SubsystemsComboBox=FXCollections.observableArrayList("Power","ADCS");
+    public ObservableList<String> SubsystemsComboBox=FXCollections.observableArrayList("Power","OBC");
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -266,7 +268,7 @@ public class InitializeWindowController implements Initializable {
         
         
     } 
-     public void loadHome() throws IOException{
+    public void loadHome() throws IOException{
       // System.out.println("model2.InitializeWindowController.loadHome()");
        AnchorPane pane = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
        //FXMLLoader  loader = new FXMLLoader(getClass().getResource("FXMLDocument.fxml"));
@@ -300,6 +302,12 @@ public class InitializeWindowController implements Initializable {
     public void SaveSubsystemButtonAction(){
         String subsystem = Subsystem.getSelectionModel().getSelectedItem().toString();
         SubSystem=subsystem;
+        if(SubSystem=="Power"){
+            SubSystemID=1;
+        }
+        else if(SubSystem=="OBC"){
+             SubSystemID=2;
+        }
         String apid = APID.getText();
         APiD=apid;
     }
@@ -325,7 +333,7 @@ public class InitializeWindowController implements Initializable {
 
         
     }
-     public void enableEquation(){
+    public void enableEquation(){
        EQuNormal.setDisable(false);
        EQuStatus.setDisable(false);
         if(!ONField.isDisabled()){
@@ -343,7 +351,7 @@ public class InitializeWindowController implements Initializable {
 
         
     }
-      public void enableEquationNormal(){
+    public void enableEquationNormal(){
        EquationField.setDisable(false);
        
         if(!EQuStatus.isDisabled()){
@@ -356,7 +364,7 @@ public class InitializeWindowController implements Initializable {
 
         
     }
-       public void enableEquationStatus(){
+    public void enableEquationStatus(){
             EQuStatusField1.setDisable(false);
             EQuStatusField2.setDisable(false);
             ADD2.setDisable(false);
@@ -370,7 +378,7 @@ public class InitializeWindowController implements Initializable {
 
         
     }
-     public void enableRange(){
+    public void enableRange(){
          if (RangeMax.isDisabled()){
            
             RangeMax.setDisable(false);
@@ -390,7 +398,7 @@ public class InitializeWindowController implements Initializable {
      }
      
      
-     public void PutIntoTable(){
+    public void PutIntoTable(){
          SensorInfo Sensor = new SensorInfo();
          Sensor.setSubsystemName(SubSystem);
          Sensor.setAPID(APID.getText());
@@ -410,29 +418,34 @@ public class InitializeWindowController implements Initializable {
          if (Range.isSelected()){
              Sensor.setMaxRange( RangeMax.getText());
              Sensor.setMinRange(RangeMin.getText());
+             Sensor.setHasRange(true);
              
          }
          else {
              Sensor.setMaxRange( "");
              Sensor.setMinRange("");
+             Sensor.setHasRange(false);
          }
            if (OnOff.isSelected()){
              Sensor.setValueON( ONField.getText());
              Sensor.setValueOFF( OFFfiled.getText());
+             Sensor.setTypeID(1);
          }
            else {
                 Sensor.setValueON( "");
-             Sensor.setValueOFF( "");
+                Sensor.setValueOFF( "");
            }
            if(Status.isSelected()){
                Sensor.setStatusValue(StatusValue);
                Sensor.setStatusNum(StatusNum);
+               Sensor.setTypeID(2);
            }
            else {
              Sensor.setStatusValue(null);
              Sensor.setStatusNum(null);
            }
            if(Equation.isSelected()){
+               Sensor.setTypeID(3);
                if(EQuNormal.isSelected()){
                    Sensor.setNormalEquation(EquationField.getText());
                }
@@ -500,7 +513,31 @@ public class InitializeWindowController implements Initializable {
          EQuStatusField2.clear();
        }
        
-       public void CreateTable(){
+       public void SaveIntoDB() throws SQLException{
+           ObservableList<SensorInfo> sensors = FXCollections.observableArrayList();
+           String SensorsName="";
+           int SensorsNo = 72;
+                   //db.NumOfSensors("sensors", db.getConnection());
+           int PacketID =  3;
+                   //db.NumOfSensors("packet", db.getConnection());
+           SensorsNo++;
+           PacketID++;
+           sensors=TableView.getItems();
+           for(int i=0;i<sensors.size();i++){
+               SensorsName+=sensors.get(i).getName()+",";
+               boolean check = sensors.get(i).getHasRange();
+               String max ="0" , min ="0";
+               if(check){
+                   max = sensors.get(i).getMaxRange();
+                   min = sensors.get(i).getMinRange();
+               }
+               System.out.println(SensorsNo +" "+sensors.get(i).getTypeID()+" "+sensors.get(i).getUnit()+" "+sensors.get(i).getFormat()+" "+Integer.parseInt(max)+" "+Integer.parseInt(min)+" "+sensors.get(i).getName()+" "+sensors.get(i).getDescription());
+               db.InsertSenssor(SensorsNo,sensors.get(i).getTypeID(),sensors.get(i).getUnit(),"decimal",sensors.get(i).getFormat(),Integer.parseInt(max),Integer.parseInt(min),sensors.get(i).getName(),sensors.get(i).getDescription(),db.connectDB());
+               db.InsertSenssorsAddress(Integer.parseInt(sensors.get(i).getByte()),SubSystemID,SensorsNo,Integer.parseInt(sensors.get(i).getBit()),Integer.parseInt(sensors.get(i).getOrder()),db.connectDB());
+               SensorsNo++;
+           }
+           
+           db.InsertPacket(PacketID,SubSystemID,Integer.parseInt(APiD),SensorsName,db.connectDB()) ;
            
        }
     

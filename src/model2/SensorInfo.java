@@ -27,6 +27,10 @@ public class SensorInfo {
          private String MinRange;
          private String ValueON;
          private String ValueOFF;
+         private int TypeID;
+         private Boolean HasRange;
+
+   
         // private Map<String,String> Status = new HashMap <String,String> ();
          private ArrayList<String> StatusNum = new ArrayList <String> ();
          private ArrayList<String> StatusValue = new ArrayList <String> ();
@@ -256,7 +260,21 @@ public class SensorInfo {
         this.NormalEquation = NormalEquation;
     }
 
-   
+    public void setTypeID(int TypeID) {
+        this.TypeID = TypeID;
+    }
+
+    public int getTypeID() {
+        return TypeID;
+    }
+
+    public Boolean getHasRange() {
+        return HasRange;
+    }
+
+    public void setHasRange(Boolean HasRange) {
+        this.HasRange = HasRange;
+    }
 
          
 }
