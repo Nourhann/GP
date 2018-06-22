@@ -9,49 +9,34 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="main" prefHeight="721.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="model2.BeginUnpackingProcessController">
+<AnchorPane id="AnchorPane" fx:id="main" prefHeight="721.0" prefWidth="1351.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="model2.BeginUnpackingProcessController">
     <children>
-        <MenuBar prefHeight="29.0" prefWidth="1280.0" VBox.vgrow="NEVER">
+        <MenuBar prefHeight="29.0" prefWidth="1351.0" VBox.vgrow="NEVER">
       <menus>
         <Menu mnemonicParsing="false" onAction="#loadHome" onShowing="#loadHome" text="Home">
                   <items>
                      <MenuItem mnemonicParsing="false" onAction="#loadHome" text="Go TO Home" />
                   </items></Menu>
-        <Menu mnemonicParsing="false" text="Begin unpacking ">
-          <items>
-          
-          </items>
-        </Menu>
-            <Menu mnemonicParsing="false" text="Charts">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-              </items>
-            </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-          </items>
-        </Menu>
       </menus>
     </MenuBar>
-      <AnchorPane layoutY="27.0" prefHeight="693.0" prefWidth="1280.0" style="-fx-background-color: #000000;">
+      <AnchorPane layoutY="28.0" prefHeight="692.0" prefWidth="1351.0" style="-fx-background-color: #000000;">
          <children>
             <TilePane fx:id="loadPane14" layoutX="14.0" layoutY="67.0" prefHeight="586.0" prefWidth="230.0" style="-fx-background-color: #ffffff;" />
-            <TilePane fx:id="OBCTile" layoutX="525.0" layoutY="67.0" prefHeight="586.0" prefWidth="230.0" style="-fx-background-color: #ffffff;" />
-            <TilePane fx:id="loadPane12" layoutX="779.0" layoutY="67.0" prefHeight="586.0" prefWidth="230.0" style="-fx-background-color: #ffffff;" />
-            <TilePane fx:id="loadPane11" layoutX="1036.0" layoutY="67.0" prefHeight="586.0" prefWidth="230.0" style="-fx-background-color: #ffffff;" />
-            <TilePane fx:id="loadPane1" layoutX="274.0" layoutY="67.0" prefHeight="586.0" prefWidth="230.0" style="-fx-background-color: #ffffff;" />
-            <Label alignment="CENTER" layoutX="243.0" layoutY="27.0" prefHeight="40.0" prefWidth="218.0" text="Power Subsystem" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+            <TilePane fx:id="OBCTile" layoutX="580.0" layoutY="67.0" prefHeight="586.0" prefWidth="230.0" style="-fx-background-color: #ffffff;" />
+            <TilePane fx:id="loadPane12" layoutX="847.0" layoutY="67.0" prefHeight="586.0" prefWidth="230.0" style="-fx-background-color: #ffffff;" />
+            <TilePane fx:id="loadPane11" layoutX="1107.0" layoutY="67.0" prefHeight="586.0" prefWidth="230.0" style="-fx-background-color: #ffffff;" />
+            <TilePane fx:id="loadPane1" layoutX="295.0" layoutY="67.0" prefHeight="586.0" prefWidth="230.0" style="-fx-background-color: #ffffff;" />
+            <Label alignment="CENTER" layoutX="288.0" layoutY="27.0" prefHeight="40.0" prefWidth="218.0" text="Power Subsystem" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="1050.0" layoutY="27.0" prefHeight="40.0" prefWidth="218.0" text="Communication Subsystem" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+            <Label alignment="CENTER" layoutX="1113.0" layoutY="27.0" prefHeight="40.0" prefWidth="218.0" text="Communication Subsystem" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="791.0" layoutY="27.0" prefHeight="40.0" prefWidth="218.0" text="Antena (AntS)" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+            <Label alignment="CENTER" layoutX="827.0" layoutY="27.0" prefHeight="40.0" prefWidth="218.0" text="Antena (AntS)" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
                <font>
                   <Font size="16.0" />
                </font>

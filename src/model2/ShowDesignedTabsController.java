@@ -5,6 +5,7 @@
  */
 package model2;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,11 +16,15 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -32,11 +37,13 @@ public class ShowDesignedTabsController implements Initializable {
      * Initializes the controller class.
      */
     @FXML
-    public TableView<String> tableView;
+    private AnchorPane root;
     @FXML
-    public TableColumn<String, String> nameCol;
+    public TableView<TabInfo> tableView;
+    @FXML
+    public TableColumn<TabInfo, String> nameCol;
     DB db = new DB();
-    ArrayList<String> Tabs = new ArrayList<String>();
+    ArrayList<TabInfo> Tabs = new ArrayList<TabInfo>();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        assert nameCol != null ;
@@ -45,29 +52,48 @@ public class ShowDesignedTabsController implements Initializable {
         // set cell value factories
        nameCol.setCellValueFactory(new PropertyValueFactory("Name"));
 
-        try {
-            
-            tableView.setItems(initializeTable());
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(ShowDesignedTabsController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-     
-     public ObservableList initializeTable() throws SQLException {
-      ObservableList<String> tabs = FXCollections.observableArrayList();
+//        try {
+//            
+//            tableView.setItems(initializeTable());
+//            
+//        } catch (SQLException ex) {
+//            Logger.getLogger(ShowDesignedTabsController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+    }  
+    public ObservableList<TabInfo> initializeTable() throws SQLException {
+      ObservableList<TabInfo> tabs = FXCollections.observableArrayList();
       System.out.println("henea");
       ResultSet result=db.ShowUserTabs(db.connectDB());
-      System.out.println(result);
-      
+      System.out.println(result.getString(0));
+      //int count =0;
       while (result.next()){
-          tabs.add(result.getString(1));
+          TabInfo t = new TabInfo();
+          t.setName(result.getString(1));
+          t.setSensors(result.getString(2));
+          tabs.add(t);
           System.out.println("aho "+tabs.get(0));
+         // count++;
           
       }
       
       return tabs;
          
 }    
+    public void loadHome() throws IOException{
+       try{
+           System.out.println("eh ya wasa5");
+           AnchorPane pane = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+           Scene scene = new Scene(root);
+           Stage stage = new Stage();
+           stage.setScene(scene);
+           stage.show();
+           //root.getChildren().clear();
+           //root.getChildren().addAll(pane);
+       }
+       catch(Exception e){
+           System.out.println("model2.ShowDesignedTabsController.loadHome()");
+       }
+     }
+    
     
 }

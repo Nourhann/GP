@@ -365,7 +365,7 @@ public class DB {
          ResultSet ShowUserTabs (Connection connection) throws SQLException
     {   
         
-            String query="SELECT tabname FROM `usertab`";
+            String query="SELECT * FROM `usertab`";
             Statement statement=connection.createStatement();
             ResultSet Table=statement.executeQuery(query);
             return Table;

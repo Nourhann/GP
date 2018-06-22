@@ -5,7 +5,10 @@
  */
 package model2;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
@@ -30,16 +33,27 @@ public class UpdateFilesDistinationController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-    
+    public void saveIntofile(String fileName,String path) throws IOException{
+        FileWriter fileWriter = new FileWriter(fileName);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(path);
+            bufferedWriter.close();
+    } 
     public void buttom1(){
         fileName1 =buttomcode(listView);
         
     }
-     public void buttom2(){
+    public void buttom2(){
         fileName2 =buttomcode(listView2);
         
     }
- public String buttomcode (ListView listView ){
+    public void saveLiveFilePath() throws IOException{
+         saveIntofile("livefile.txt",fileName1);
+      }
+    public void saveOfflineFilePath() throws IOException{
+         saveIntofile("offlinefile.txt",fileName2);
+      }
+    public String buttomcode (ListView listView ){
        
                 FileChooser fileChooser = new FileChooser();
                 FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");

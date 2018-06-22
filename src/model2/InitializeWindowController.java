@@ -22,6 +22,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -39,6 +40,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -204,10 +207,10 @@ public class InitializeWindowController implements Initializable {
     public TextField RangeFiled;
     public AnchorPane Vbox ;
     public ObservableList<String> SubsystemsComboBox=FXCollections.observableArrayList("Power","OBC");
-
+ 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-   
+        ShowCerfullNotification();
         OnOff.setToggleGroup(groupType);
         //OnOff.setSelected(true);
         Status.setToggleGroup(groupType);
@@ -270,12 +273,15 @@ public class InitializeWindowController implements Initializable {
     } 
     public void loadHome() throws IOException{
       // System.out.println("model2.InitializeWindowController.loadHome()");
-       AnchorPane pane = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+       try{AnchorPane pane = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
        //FXMLLoader  loader = new FXMLLoader(getClass().getResource("FXMLDocument.fxml"));
        //Vbox = (AnchorPane) loader.load();
        Vbox.getChildren().clear();
        Vbox.getChildren().addAll(pane);
-   
+       }
+       catch(Exception e){
+           
+       }
      }
     public void enableONOFF(){
        // ON.setDisable(false);
@@ -396,9 +402,9 @@ public class InitializeWindowController implements Initializable {
        
 
      }
-     
-     
     public void PutIntoTable(){
+         int Size = TableView.getItems().size();
+         if(Size <2){
          SensorInfo Sensor = new SensorInfo();
          Sensor.setSubsystemName(SubSystem);
          Sensor.setAPID(APID.getText());
@@ -458,6 +464,10 @@ public class InitializeWindowController implements Initializable {
             //sensors.add(Sensor);
        // TableView.setItems(sensors);
         TableView.getItems().add(Sensor);
+         }
+         else {
+             ShowOutOFsizeNotification();
+         }
         SensorName.clear();
         SensorUnit.clear();
         positiveFormat.setSelected(false);
@@ -486,16 +496,14 @@ public class InitializeWindowController implements Initializable {
          
            
      }
-     public ObservableList<SensorInfo> getData() {
+    public ObservableList<SensorInfo> getData() {
       
         ObservableList<SensorInfo> sensors = FXCollections.observableArrayList();
        // SensorInfo Sensor = new SensorInfo("hi", "hi", "hi", "hi", "hi", "hi", "hi", "hi", "hi", "hi", "hi", "hi", "hi", "hi");
         //sensors.add(Sensor);
         return sensors;
     }
-   
-     
-     public void ADDstatus(){
+    public void ADDstatus(){
         String num = StatusField.getText();
         String value = StatusField1.getText();
         StatusValue.add(value);
@@ -504,16 +512,15 @@ public class InitializeWindowController implements Initializable {
          StatusField.clear();
          StatusField1.clear();
      }
-       public void ADDEQUstatus(){
+    public void ADDEQUstatus(){
         String num = EQuStatusField1.getText();
         String value = EQuStatusField2.getText();
         EquationStatusValue.add(value);
         EquationStatusNum.add(num);
          EQuStatusField1.clear();
          EQuStatusField2.clear();
-       }
-       
-       public void SaveIntoDB() throws SQLException{
+       }    
+    public void SaveIntoDB() throws SQLException{
            ObservableList<SensorInfo> sensors = FXCollections.observableArrayList();
            String SensorsName="";
            int SensorsNo = 72;
@@ -540,5 +547,30 @@ public class InitializeWindowController implements Initializable {
            db.InsertPacket(PacketID,SubSystemID,Integer.parseInt(APiD),SensorsName,db.connectDB()) ;
            
        }
-    
+    public void ShowCerfullNotification(){
+        Notifications notification = Notifications.create()
+                .title("Initialization section is critical")
+                .text("This section is mainly critical, consequently an0y change in it would cause a significant change in the out result  ")
+                .graphic(null)
+                .hideAfter(Duration.seconds(5))
+                .position(Pos.CENTER);
+        notification.show();
+                
+                
+        
+    }
+    public void ShowOutOFsizeNotification(){
+        Notifications notification = Notifications.create()
+                .title("Exceed the maximum number of sensors")
+                .text("Moreover, the program will not provide an additional sensor as it will exceed the maximum number of sensors")
+                .graphic(null)
+                .hideAfter(Duration.seconds(5))
+                .position(Pos.CENTER);
+        notification.show();
+                
+                
+        
+    }
+     
+     
 }

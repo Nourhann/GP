@@ -5,6 +5,8 @@
  */
 package model2;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -25,6 +27,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -85,7 +88,7 @@ public class BeginUnpackingProcessController implements Initializable {
             // TODO
             initializePowerTables();
             initializeOBCTables();
-            convert(" ");
+            convert();
             ViewPower();
             System.out.println("NNNN");
         } catch (SQLException ex) {
@@ -96,7 +99,58 @@ public class BeginUnpackingProcessController implements Initializable {
             Logger.getLogger(BeginUnpackingProcessController.class.getName()).log(Level.SEVERE, null, ex);
         }
     } 
-    public void convert(String file) throws SQLException, ScriptException{   
+   /* public void convert2() throws SQLException, IOException, ScriptException{
+     unpacking1 obj=new unpacking1();
+     Packet_1 p=new Packet_1();
+     obj.getDb().setConnection(obj.getDb().connectDB());
+     obj.getConvert().setConvertTable(obj.getConvert().Initialization(obj.getConvert().getConvertTable()));
+     obj.Standard(obj);
+     obj.Map(obj);
+     obj.MapPackets(obj);
+     obj.setModeOfProgram(false);
+        if (obj.isModeOfProgram()) 
+        {
+            int count = obj.CreateSession(obj);
+            //PrintWriter writer = new PrintWriter(count+".txt", "UTF-8");
+            //writer.close();
+            String SessionFile = count + ".txt";
+            long length = 0;
+            while (true) 
+            {
+                while (length == 0) 
+                {
+                    length = p.FileLength("ahmed.txt");
+                }
+                String Data = p.readfileOnline("ahmed.txt");
+                if (length > 0) 
+                {
+                    length = 0;
+                    //writer.print(Data);
+                    p.writefile(Data, SessionFile);
+                    p.SplitData(count, obj, " " + Data);
+                    obj.PacketInformation(obj);
+                }
+                System.out.println("0");
+            }
+        }
+        else 
+        {
+            String Data = p.readfileOffline("test.txt");
+            p.SplitData(0, obj, " " + Data);
+            obj.PacketInformation(obj);
+        }
+    
+    }*/
+    public void convert() throws SQLException, ScriptException, IOException{   
+     String file="";
+     String mood = readFromfile("mood.txt");
+     if(mood.equals("on")){
+         file=readFromfile("livefile.txt");
+     }
+     else if(mood.equals("off")){
+         file= readFromfile("offlinefile.txt");
+     }
+        System.out.println("hena "+mood);
      obj=new unpacking();
      Packet p=new Packet();
      obj.getDb().setConnection(obj.getDb().connectDB());
@@ -105,7 +159,7 @@ public class BeginUnpackingProcessController implements Initializable {
      obj.Map(obj);
      obj.MapPackets(obj);
      int count=obj.CreateSession(obj);
-     p.SplitData(count, obj,"test.txt");
+     p.SplitData(count, obj,file);
      obj.PacketInformation(obj);
      p=null;
      //-------------------------------------------------------------------------------------------------
@@ -151,7 +205,7 @@ public class BeginUnpackingProcessController implements Initializable {
                       }
                    
                      
-                      return PowerSensors[Powercounter]+" "+Powerresult.getString(1)+"\n";
+                      return PowerSensors[Powercounter]+"  "+Powerresult.getString(1)+"\n";
                       
                   }
               };
@@ -184,15 +238,21 @@ public class BeginUnpackingProcessController implements Initializable {
                 //System.out.println(min);
                 double max = Double.parseDouble((String) list.get(6));
                 if((min !=0 || max !=0)){
-                   // System.out.println("value "+split[1]);
-                double value = Double.parseDouble(split[1]);
-                  if((value <min || value>max)){
+                 System.out.println("value "+split[1]);
+                try{
+                    double value = Double.parseDouble(split[1]);
+                     if((value <min || value>max)){
                        
                  rec1.setTextFill(Color.web("#FF0000"));
                   }
                   else {
                       rec1.setTextFill(Color.web("#008000")); 
                   }
+                }
+                 catch(Exception e)
+                    {
+                        System.out.println("Cant check!");
+                    }
                 }
                 else {
                 rec1.setTextFill(Color.web("#008000"));
@@ -219,8 +279,7 @@ public class BeginUnpackingProcessController implements Initializable {
      
     
     nextPowerPane(SensorBuilder);
-    }
-     
+    } 
     private void loadOBCTab() {
   
     
@@ -305,7 +364,6 @@ public class BeginUnpackingProcessController implements Initializable {
     
     nextOBCPane(SensorBuilder);
     }
-    
     public void initializePowerTables() throws SQLException {
   
     
@@ -350,8 +408,7 @@ public class BeginUnpackingProcessController implements Initializable {
         OBCLimits = obj.getSensors();
         obcresult = subsystem.ReadData(x, "OBC SubSystem");
         obcresult.next();
-    }
-    
+    } 
     private Node createLoadPane() throws SQLException {
    
     NumberOFPowersensors =16;
@@ -363,11 +420,14 @@ public class BeginUnpackingProcessController implements Initializable {
            // waitingPane1.setMinSize(10, 20);
            // waitingPane1.setMaxSize(100, 100);
             Label background = new Label();
-            background.setText(i+"");
+            //background.setText(i+"");
             Label NewLabel = new Label();
-            NewLabel.setMaxSize(10, 100);
-            NewLabel.setMinHeight(30);
+            //NewLabel.setMaxSize(50,50);
+           
+             //NewLabel.setPadding(new Insets(0, 0,25, 0));
+            
             loadingPower[i] =NewLabel;
+            loadingPower[i].setPadding(new Insets(0, 0,10, 0));
             waitingPane1.getChildren().addAll(background, loadingPower[i]);
             loadPane1.getChildren().add(waitingPane1);
     }
@@ -375,7 +435,7 @@ public class BeginUnpackingProcessController implements Initializable {
 
     return loadPane1;
 }
-      private Node createObcPane() throws SQLException {
+    private Node createObcPane() throws SQLException {
    
     NumberOFOBCsensors =16;
             //subsystem.getNumberOfSensors("power subsystem");
@@ -395,4 +455,23 @@ public class BeginUnpackingProcessController implements Initializable {
 
     return OBCTile;
 }  
+    public String readFromfile(String fileName) throws IOException{
+    FileReader fileReader = 
+                new FileReader(fileName);
+    String line , result = "";
+
+            // Always wrap FileReader in BufferedReader.
+            BufferedReader bufferedReader = 
+                new BufferedReader(fileReader);
+        
+
+            while((line = bufferedReader.readLine()) != null) {
+                result+=line;
+            }   
+
+            // Always close files.
+            bufferedReader.close();
+            return result;
+    }
+    
 }

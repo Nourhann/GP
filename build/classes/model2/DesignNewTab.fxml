@@ -21,21 +21,6 @@
                   <items>
                      <MenuItem mnemonicParsing="false" onAction="#loadHome" text="Go TO Home" />
                   </items></Menu>
-        <Menu mnemonicParsing="false" text="Begin unpacking ">
-          <items>
-          
-          </items>
-        </Menu>
-            <Menu mnemonicParsing="false" text="Charts">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-              </items>
-            </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-          </items>
-        </Menu>
       </menus>
     </MenuBar>
     <TableView fx:id="tableView" layoutX="45.0" layoutY="79.0" prefHeight="465.0" prefWidth="404.0" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="751.0" AnchorPane.topAnchor="79.0">

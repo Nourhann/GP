@@ -112,16 +112,18 @@ public class DesignNewTabController implements Initializable {
         //Set row selection as default
         setRowSelection();
     }    
-     public void loadHome() throws IOException{
+    public void loadHome() throws IOException{
       // System.out.println("model2.InitializeWindowController.loadHome()");
-       AnchorPane pane = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+       try{AnchorPane pane = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
        //FXMLLoader  loader = new FXMLLoader(getClass().getResource("FXMLDocument.fxml"));
        //Vbox = (AnchorPane) loader.load();
        root.getChildren().clear();
        root.getChildren().addAll(pane);
-   
+       }
+       catch(Exception e){
+           
+       }
      }
-    
     @FXML
     private void Store(ActionEvent event) throws SQLException {
       // final ObservableList<Sensor> table = tableView.getSelectionModel().getSelectedItems(); 
@@ -133,13 +135,11 @@ public class DesignNewTabController implements Initializable {
       // System.out.println(TabName.getText());
        db.Insertusertab(result,TabName.getText(),db.getConnection());
     }
-    
     public void setRowSelection() {
         tableView.getSelectionModel().clearSelection();
         tableView.getSelectionModel().setCellSelectionEnabled(false);
     }
     private void setSelection(IndexedCell cell) {
-        
             if (cell.isSelected()) {
                 System.out.println("False");
                 tableView.getSelectionModel().clearSelection(cell.getIndex());
@@ -151,7 +151,7 @@ public class DesignNewTabController implements Initializable {
         
 
     }
-     private void setCellValueFactories() {
+    private void setCellValueFactories() {
         snCol.setCellValueFactory(new PropertyValueFactory("Subsystem"));
         nameCol.setCellValueFactory(new PropertyValueFactory("Name"));
        
@@ -214,5 +214,6 @@ public class DesignNewTabController implements Initializable {
         }
         return sensors;
     }
+   
 }
 
