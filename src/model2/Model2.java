@@ -18,7 +18,6 @@ import javafx.stage.StageStyle;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -48,7 +47,7 @@ public class Model2 extends Application {
         toolBar.setPrefHeight(height);
         toolBar.setMinHeight(height);
         toolBar.setMaxHeight(height);
-        toolBar.setStyle("-fx-background-color: black;");
+        toolBar.setStyle("-fx-background-color: #010b17;");
         WindowButtons button = new WindowButtons();
         button.setAlignment(Pos.CENTER_RIGHT);
         button.setStyle("-fx-background-color: red;");
@@ -74,9 +73,8 @@ public class Model2 extends Application {
 
         public WindowButtons() {
             Button closeBtn = new Button("X");
-
+            closeBtn.setStyle("-fx-background-color: red;");
             closeBtn.setOnAction(new EventHandler<ActionEvent>() {
-
                 @Override
                 public void handle(ActionEvent actionEvent) {
                     Platform.exit();

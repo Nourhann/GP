@@ -9,19 +9,32 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="model2.DesignNewTabController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="700.0" prefWidth="1351.0" style="-fx-background-color: #f4f4f4;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="model2.DesignNewTabController">
     <children>
-         <MenuBar prefWidth="1200.0" VBox.vgrow="NEVER">
+         <MenuBar prefHeight="25.0" prefWidth="1351.0" style="-fx-background-color: #72f7fc;" VBox.vgrow="NEVER">
       <menus>
         <Menu mnemonicParsing="false" onAction="#loadHome" onShowing="#loadHome" text="Home">
                   <items>
                      <MenuItem mnemonicParsing="false" onAction="#loadHome" text="Go TO Home" />
                   </items></Menu>
       </menus>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
     </MenuBar>
     <TableView fx:id="tableView" layoutX="45.0" layoutY="79.0" prefHeight="465.0" prefWidth="404.0" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="751.0" AnchorPane.topAnchor="79.0">
       <columns>
@@ -36,9 +49,15 @@
         <Font name="System Bold" size="12.0" />
       </font>
     </Label>
-      <Button layoutX="870.0" layoutY="254.0" mnemonicParsing="false" onAction="#Store" prefHeight="58.0" prefWidth="208.0" text="Store" />
-      <Button layoutX="870.0" layoutY="329.0" mnemonicParsing="false" onAction="#Store" prefHeight="58.0" prefWidth="208.0" text="Show" />
-      <TextField fx:id="TabName" layoutX="870.0" layoutY="178.0" prefHeight="25.0" prefWidth="208.0" promptText="Tab Name" />
+      <Button layoutX="1051.0" layoutY="204.0" mnemonicParsing="false" onAction="#Store" prefHeight="58.0" prefWidth="208.0" style="-fx-background-color: #010b17;" text="Store" textFill="#72f7fc">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <Button layoutX="1051.0" layoutY="304.0" mnemonicParsing="false" onAction="#Store" prefHeight="58.0" prefWidth="208.0" style="-fx-background-color: #010b17;" text="Show" textFill="#72f7fc">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <TextField fx:id="TabName" layoutX="1051.0" layoutY="128.0" prefHeight="25.0" prefWidth="208.0" promptText="Tab Name" />
   </children>
     
 </AnchorPane>

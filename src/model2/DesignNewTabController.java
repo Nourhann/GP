@@ -187,7 +187,7 @@ public class DesignNewTabController implements Initializable {
             }
         });
     }
-    public void initializePowerTables() throws SQLException {
+    public void initializeTable() throws SQLException {
       System.out.println("henea");
     
       String result=db.PACKETSENSORS("Power",db.connectDB());
@@ -198,7 +198,7 @@ public class DesignNewTabController implements Initializable {
     public ObservableList<Sensor> getData() {
         try {
            
-            initializePowerTables();
+            initializeTable();
         } catch (SQLException ex) {
             Logger.getLogger(DesignNewTabController.class.getName()).log(Level.SEVERE, null, ex);
         }

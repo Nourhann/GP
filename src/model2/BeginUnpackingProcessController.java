@@ -205,7 +205,7 @@ public class BeginUnpackingProcessController implements Initializable {
                       }
                    
                      
-                      return PowerSensors[Powercounter]+"  "+Powerresult.getString(1)+"\n";
+                      return PowerSensors[Powercounter]+" ="+Powerresult.getString(1)+"\n\n";
                       
                   }
               };
@@ -229,7 +229,7 @@ public class BeginUnpackingProcessController implements Initializable {
                    // System.out.println(counter +" "+Powerresult.getString(1));
                      System.out.println("henA");
                 Label rec1 = new Label();
-                String split []= SensorBuilder.valueProperty().getValue().split("  ");
+                String split []= SensorBuilder.valueProperty().getValue().split(" =");
               
                 rec1.setText(SensorBuilder.valueProperty().getValue());
                 loadingPower[Powercounter].textProperty().unbind();
@@ -246,7 +246,7 @@ public class BeginUnpackingProcessController implements Initializable {
                  rec1.setTextFill(Color.web("#FF0000"));
                   }
                   else {
-                      rec1.setTextFill(Color.web("#008000")); 
+                      rec1.setTextFill(Color.web("#010b17")); 
                   }
                 }
                  catch(Exception e)
@@ -255,9 +255,9 @@ public class BeginUnpackingProcessController implements Initializable {
                     }
                 }
                 else {
-                rec1.setTextFill(Color.web("#008000"));
+                rec1.setTextFill(Color.web("#010b17"));
                 }
-                rec1.setFont(Font.font ("Verdana", 15));
+                rec1.setFont(Font.font ("Verdana", 14));
                 loadPane1.getChildren().set(Powercounter, rec1);
                 if(Powercounter<NumberOFPowersensors-1){
                     Powercounter++;
@@ -424,11 +424,11 @@ public class BeginUnpackingProcessController implements Initializable {
             Label NewLabel = new Label();
             //NewLabel.setMaxSize(50,50);
            
-             //NewLabel.setPadding(new Insets(0, 0,25, 0));
+            NewLabel.setPadding(new Insets(0, 0,25, 0));
             
             loadingPower[i] =NewLabel;
             loadingPower[i].setPadding(new Insets(0, 0,10, 0));
-            waitingPane1.getChildren().addAll(background, loadingPower[i]);
+            waitingPane1.getChildren().addAll(loadingPower[i]);
             loadPane1.getChildren().add(waitingPane1);
     }
    

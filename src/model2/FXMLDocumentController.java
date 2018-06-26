@@ -42,10 +42,7 @@ public class FXMLDocumentController implements Initializable {
     
     
     @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
+  
     public void loadInitialization() throws IOException{
         try{AnchorPane pane = FXMLLoader.load(getClass().getResource("initialization_1.fxml"));
        root.getChildren().clear();
@@ -186,8 +183,5 @@ public class FXMLDocumentController implements Initializable {
             // Always close files.
             bufferedReader.close();
             return result;
-    }
-     public void test(){
-        System.out.println("7asal");
     }
 }

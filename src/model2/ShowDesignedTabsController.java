@@ -80,20 +80,21 @@ public class ShowDesignedTabsController implements Initializable {
          
 }    
     public void loadHome() throws IOException{
-       try{
-           System.out.println("eh ya wasa5");
+       try
+       {
+          // System.out.println("eh b2a");
            AnchorPane pane = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
-           Scene scene = new Scene(root);
-           Stage stage = new Stage();
-           stage.setScene(scene);
-           stage.show();
-           //root.getChildren().clear();
-           //root.getChildren().addAll(pane);
+          root.getChildren().clear();
+          root.getChildren().addAll(pane);
+        
        }
        catch(Exception e){
            System.out.println("model2.ShowDesignedTabsController.loadHome()");
        }
      }
+    public void Show(){
+        
+    }
     
     
 }

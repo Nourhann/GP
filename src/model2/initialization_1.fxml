@@ -13,6 +13,9 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
@@ -21,15 +24,25 @@
 <AnchorPane fx:id="Vbox" prefHeight="700.0" prefWidth="1351.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="model2.InitializeWindowController">
    <VBox maxHeight="700.0" maxWidth="1351.0" minHeight="698.0" minWidth="1280.0" prefHeight="700.0" prefWidth="1351.0">
     <children>
-    <MenuBar prefHeight="25.0" prefWidth="1318.0" VBox.vgrow="NEVER">
+    <MenuBar prefHeight="25.0" prefWidth="1318.0" style="-fx-background-color: #72f7fc;" VBox.vgrow="NEVER">
       <menus>
         <Menu mnemonicParsing="false" onAction="#loadHome" onShowing="#loadHome" text="Home">
                   <items>
                      <MenuItem mnemonicParsing="false" onAction="#loadHome" text="Go TO Home" />
                   </items></Menu>
       </menus>
+            <effect>
+               <Lighting>
+                  <bumpInput>
+                     <Shadow />
+                  </bumpInput>
+                  <light>
+                     <Light.Distant />
+                  </light>
+               </Lighting>
+            </effect>
     </MenuBar>
-<AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="60.0" prefWidth="1331.0">
+<AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="60.0" prefWidth="1331.0" style="-fx-background-color: #e7e7e7;">
   <children>
     <Label alignment="CENTER" layoutX="14.0" prefHeight="60.0" prefWidth="125.0" style="&#10;" text="Subsystem" textAlignment="CENTER" wrapText="false">
                <font>
@@ -43,12 +56,15 @@
 <TextField fx:id="APID" layoutX="568.0" layoutY="18.0" prefHeight="25.0" prefWidth="95.0" />
             <Label layoutX="225.0" layoutY="22.0" text="Subsystem" />
             <ComboBox fx:id="Subsystem" layoutX="311.0" layoutY="18.0" prefWidth="150.0" />
-               <Button fx:id="SaveForSubsystem" layoutX="745.0" layoutY="13.0" mnemonicParsing="false" onAction="#SaveSubsystemButtonAction" prefHeight="35.0" prefWidth="87.0" text="Save" />
+               <Button fx:id="SaveForSubsystem" layoutX="745.0" layoutY="13.0" mnemonicParsing="false" onAction="#SaveSubsystemButtonAction" prefHeight="35.0" prefWidth="87.0" style="-fx-background-color: #010b17;" text="Save" textFill="#72f7fc">
+                  <font>
+                     <Font size="14.0" />
+                  </font></Button>
   </children>
 </AnchorPane>
     <SplitPane dividerPositions="0.29" focusTraversable="true" prefWidth="1280.0" VBox.vgrow="ALWAYS">
       <items>
-        <AnchorPane layoutY="344.0" prefHeight="627.0" prefWidth="409.0">
+        <AnchorPane layoutY="344.0" prefHeight="627.0" prefWidth="409.0" style="-fx-background-color: #e7e7e7;">
           <children>
             <Label alignment="CENTER" layoutX="15.0" layoutY="1.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Sensors" textAlignment="CENTER" wrapText="false">
               <font>
@@ -94,7 +110,7 @@
                      <RadioButton fx:id="NegativeFormat" layoutX="152.0" layoutY="112.0" mnemonicParsing="false" text="-" />
           </children>
         </AnchorPane>
-        <AnchorPane prefHeight="634.0" prefWidth="863.0" SplitPane.resizableWithParent="false">
+        <AnchorPane prefHeight="634.0" prefWidth="863.0" style="-fx-background-color: #e7e7e7;" SplitPane.resizableWithParent="false">
           <children>
             <Label alignment="CENTER" layoutX="14.0" layoutY="1.0" style="&#10;" text="View" textAlignment="CENTER" wrapText="false">
                      <font>
@@ -147,7 +163,10 @@
                            <TableColumn fx:id="DescriptionCol" prefWidth="118.0" text="Description" />
         </columns>
       </TableView>
-                  <Button layoutX="677.0" layoutY="535.0" mnemonicParsing="false" onAction="#SaveIntoDB" prefHeight="27.0" prefWidth="117.0" text="Save" />
+                  <Button layoutX="677.0" layoutY="535.0" mnemonicParsing="false" onAction="#SaveIntoDB" prefHeight="35.0" prefWidth="117.0" style="-fx-background-color: #010b17;" text="Save" textFill="#72f7fc">
+                        <font>
+                           <Font size="14.0" />
+                        </font></Button>
           </children>
         </AnchorPane>
       </items>

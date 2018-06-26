@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.LineChart;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -25,6 +26,8 @@ public class ChartsController implements Initializable {
      */
     @FXML
     public AnchorPane root;
+    public LineChart <String ,String> lineChart;
+    public DB db = new DB();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -43,6 +46,9 @@ public class ChartsController implements Initializable {
        }
    
      } 
+     void LoadChart(){
+            
+        }
      
     
 }

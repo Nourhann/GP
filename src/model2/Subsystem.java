@@ -7,15 +7,48 @@ package model2;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author norhan
  */
 public class Subsystem {
+    private String Name;
     private int NumberOfSensors;
     private String [] Sensors;
-    DB db = new DB();
+    private unpacking unpackingObject;
+    private DB db = new DB();
+    private Map<String, List<String>> Limits;
+
+    public int getNumberOfSensors() {
+        return NumberOfSensors;
+    }
+
+    public unpacking getUnpackingObject() {
+        return unpackingObject;
+    }
+
+    public DB getDb() {
+        return db;
+    }
+
+    public void setNumberOfSensors(int NumberOfSensors) {
+        this.NumberOfSensors = NumberOfSensors;
+    }
+
+    public void setSensors(String[] Sensors) {
+        this.Sensors = Sensors;
+    }
+
+    public void setUnpackingObject(unpacking unpackingObject) {
+        this.unpackingObject = unpackingObject;
+    }
+
+    public void setDb(DB db) {
+        this.db = db;
+    }
 
     public int getNumberOfSensors(String SystemName ) throws SQLException {
        return db.NumOfSensorsForSubSystem(SystemName,db.connectDB());

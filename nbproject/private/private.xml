@@ -3,12 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/norhan/Documents/NetBeansProjects/Model2/src/model2/Sensor.java</file>
             <file>file:/C:/Users/norhan/Documents/NetBeansProjects/Model2/src/model2/BeginUnpackingProcessController.java</file>
-            <file>file:/C:/Users/norhan/Documents/NetBeansProjects/Model2/src/model2/ShowDesignedTabsController.java</file>
-            <file>file:/C:/Users/norhan/Documents/NetBeansProjects/Model2/src/model2/DesignNewTabController.java</file>
+            <file>file:/C:/Users/norhan/Documents/NetBeansProjects/Model2/src/model2/unpacking.java</file>
+            <file>file:/C:/Users/norhan/Documents/NetBeansProjects/Model2/src/model2/Subsystem.java</file>
             <file>file:/C:/Users/norhan/Documents/NetBeansProjects/Model2/src/model2/DB.java</file>
-            <file>file:/C:/Users/norhan/Documents/NetBeansProjects/Model2/src/model2/ChartsController.java</file>
-            <file>file:/C:/Users/norhan/Documents/NetBeansProjects/Model2/src/model2/TabInfo.java</file>
+            <file>file:/C:/Users/norhan/Documents/NetBeansProjects/Model2/src/model2/FXMLDocument.fxml</file>
+            <file>file:/C:/Users/norhan/Documents/NetBeansProjects/Model2/src/model2/FXMLDocumentController.java</file>
         </group>
     </open-files>
 </project-private>
