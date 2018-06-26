@@ -20,12 +20,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  *
@@ -120,7 +123,18 @@ public class FXMLDocumentController implements Initializable {
        }
     }
     public void loadBeginUnpackingProcess() throws IOException{
-     try{ AnchorPane pane = FXMLLoader.load(getClass().getResource("BeginUnpackingProcess.fxml"));
+        
+     try{
+         String a = readIntofile("livefile.txt");
+          String b=readIntofile("offlinefile.txt");
+            if (a.length()<=0 ||b.length()<=0){
+               
+             
+                    SelectNotification();
+                
+            }
+            else {
+         AnchorPane pane = FXMLLoader.load(getClass().getResource("BeginUnpackingProcess.fxml"));
        root.getChildren().clear();
        root.getChildren().addAll(pane);
 //      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DesignNewTab.fxml"));
@@ -131,6 +145,7 @@ public class FXMLDocumentController implements Initializable {
 //        
       //  root
      }
+     }
      catch(Exception e){
          
      }
@@ -139,6 +154,8 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             saveIntofile("mood.txt","off");
+            
+            
         } catch (IOException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -183,5 +200,17 @@ public class FXMLDocumentController implements Initializable {
             // Always close files.
             bufferedReader.close();
             return result;
+    }
+    public void SelectNotification(){
+        Notifications notification = Notifications.create()
+                .title("Select file first")
+                .text("File directory must be selected before begin unpacking process")
+                .graphic(null)
+                .hideAfter(Duration.seconds(5))
+                .position(Pos.CENTER);
+        notification.show();
+                
+                
+        
     }
 }
