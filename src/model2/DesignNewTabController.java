@@ -129,11 +129,11 @@ public class DesignNewTabController implements Initializable {
       // final ObservableList<Sensor> table = tableView.getSelectionModel().getSelectedItems(); 
        String result="";
        for (int i =0 ;i<selectedSensors.size();i++){
-           result+=selectedSensors.get(i)+'|';
+           result+=selectedSensors.get(i)+',';
            System.out.println(result);
        }
       // System.out.println(TabName.getText());
-       db.Insertusertab(result,TabName.getText(),db.getConnection());
+       db.Insertusertab(result,TabName.getText(),db.connectDB());
     }
     public void setRowSelection() {
         tableView.getSelectionModel().clearSelection();

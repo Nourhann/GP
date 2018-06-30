@@ -39,9 +39,9 @@
      </columns>
    </TableView>
 
-   <Button layoutX="1124.0" layoutY="649.0" mnemonicParsing="false" onAction="#loadHome" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #010b17;" text="Show" textFill="#72f7fc">
+   <Button layoutX="1124.0" layoutY="649.0" mnemonicParsing="false" onAction="#Show" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #010b17;" text="Show" textFill="#72f7fc">
       <font>
          <Font size="18.0" />
       </font></Button>
-   <TilePane layoutX="47.0" layoutY="53.0" prefHeight="517.0" prefWidth="883.0" />
+   <TilePane fx:id="loadPane1" layoutX="47.0" layoutY="53.0" prefHeight="517.0" prefWidth="883.0" />
 </AnchorPane>

@@ -380,6 +380,27 @@ public class DB {
         return num;
     }
           
+        String Selectsensorsoftab(String tabname,Connection connection) throws SQLException
+    {
+        String query="SELECT `sensors` FROM `usertab` WHERE `tabname` = '"+tabname+"'";
+        Statement statement=connection.createStatement();
+        ResultSet Table=statement.executeQuery(query);
+        Table.next();
+        String sensors = Table.getString("sensors");
+        return sensors;
+    }
+        ResultSet Selectreadsoftab( String sensorname , String sessionid ,Connection connection) throws SQLException
+    {
 
+//        String query = "SELECT  `CODE`  FROM `storage`, `sensors`"
+//                + " WHERE storage.SENSORNO=sensors.SENSORNO and"
+//                + " sessionID="+sessionid+" and sensors.SENSORNAME= "+sensorname;
+        String query = "SELECT  `CODE`  FROM `storage`, `sensors`\n" +
+                       "WHERE storage.SENSORNO = sensors.SENSORNO and\n" +
+                       "sessionID='"+sessionid+"' and sensors.SENSORNAME= '"+sensorname+"'";
+        Statement statement=connection.createStatement();
+        ResultSet Table=statement.executeQuery(query);
+        return Table;
+    }
     
 }
